@@ -1,9 +1,9 @@
 #define ARDUINO_MAIN
-#include "max6675.h"
-#include "wiring_private.h"
-#include "pins_arduino.h"
-#include <SPI.h>
-#include <SD.h>
+#include "max6675.h"        // adafruit 1.1.2 - liquidcrystal 1.0.7
+#include "wiring_private.h" // default install
+#include "pins_arduino.h"   // default install
+#include <SPI.h>            // default install
+#include <SD.h>             // arduino 1.2.4
 
 // ---------------------------------------- initialization ---------------------------------------- //
 
