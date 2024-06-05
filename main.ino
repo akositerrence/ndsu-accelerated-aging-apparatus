@@ -87,7 +87,7 @@ void printData()
   }
 }
 
-void temperatureCycle()
+void temperatureCycle(int i)
 {
   readSensors();
   while (thermocouple_1.readFahrenheit() >= 30)
@@ -196,7 +196,7 @@ void loop()
     // run process at high pressure ( 50 psi ) for defined cycles with temperature cycling
     for (int i = 0; i <= highPressureCycles + 1; i++)
     {
-      temperatureCycle();
+      temperatureCycle(i);
       digitalWrite(heatingPad, LOW); // backup heating pad shutdown
     }
 
@@ -217,8 +217,8 @@ void loop()
     // run process at low pressure ( 8 psi ) for defined cycles with temperature cycling
     for (int i = 0; i <= lowPressureCycles + 1; i++)
     {
-      temperatureCycle()
-          digitalWrite(heatingPad, LOW); // backup heating pad shutdown
+      temperatureCycle(i);
+      digitalWrite(heatingPad, LOW); // backup heating pad shutdown
     }
   }
 }
