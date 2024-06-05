@@ -34,12 +34,20 @@ MAX6675 thermocouple_2(SCK_2, CS_2, SO_2); // reads temperature entering pressur
 long lastWriteTime = 0; // variable to store the last write time
 long lastPrintTime = 0; // initialize last print time to 0
 
+// initialize global variables
+float transducerVoltage;
+float flowSensorVoltage;
+float pressure;
+float flowRate;
+bool lastState;
+bool state;
+
 // ---------------------------------------- performance - functions ---------------------------------------- //
 
 void pauseResume()
 {
-  bool lastState = HIGH;               // initialize last switch state to high
-  bool state = digitalRead(switchPin); // initialize current state with pin 49 input
+  lastState = HIGH;               // initialize last switch state to high
+  state = digitalRead(switchPin); // initialize current state with pin 49 input
   if (state == LOW && lastState == HIGH)
   {
     paused = !paused;
@@ -49,10 +57,10 @@ void pauseResume()
 
 void readSensors()
 {
-  float transducerVoltage = analogRead(A8);                                       // read voltage from transducer
-  float flowSensorVoltage = analogRead(A9);                                       // read voltage from flow sensor
-  float pressure = ((25 * (transducerVoltage - 0.5)) / 1000);                     // define pressure ( psi )
-  float flowRate = (((flowSensorVoltage - 0.70138888888) / 0.0659722222) / 1000); // define flow rate ( liters/min )
+  transducerVoltage = analogRead(A8);                                       // read voltage from transducer
+  flowSensorVoltage = analogRead(A9);                                       // read voltage from flow sensor
+  pressure = ((25 * (transducerVoltage - 0.5)) / 1000);                     // define pressure ( psi )
+  flowRate = (((flowSensorVoltage - 0.70138888888) / 0.0659722222) / 1000); // define flow rate ( liters/min )
 }
 
 void printData()
